@@ -1,0 +1,18 @@
+*{font-family: 'Abel', sans-serif;}
+    body{background-color: #FEF5E7!important;
+}
+
+@media (min-width: 576px) { 
+    .row{
+        align-content: center;
+    }
+}
+
+/* Medium devices (tablets, 768px and up)*/
+@media (min-width: 768px) {}
+
+/* Large devices (desktops, 992px and up)*/
+@media (min-width: 992px) {}
+
+/* Extra large devices (large desktops, 1200px and up)*/
+@media (min-width: 1200px) {}

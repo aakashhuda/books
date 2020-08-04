@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search List
+{% endblock %}
+
+{% block body %}
+        <div class="container pt-3">
+            <div class="row">
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <img src="{{url_for('static', filename = 'black-and-white-4270987_640.png')}}" alt="" width="200" class="py-5 my5 mx-auto d-block">
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+
+                    <p class="h4 text-center">Search Result:</p>
+                    
+                    <div class="rounded list-group mx-auto d-block p-2 ">
+                        <ul>
+                            {% for book in books %}
+                                <a href="{{url_for('book',id=book.id)}}" class="list-group-item list-group-item-action text-center">{{book.title}}</a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                    <div class="m-5 text-center mx-auto d-block">
+                        <a class="btn btn-outline-secondary btn-lg btn-block" href="{{url_for('login')}}" role="button">Search Again</a>
+                    </div>
+                </div>
+            </div>
+            
+            
+        </div>
+    
+{% endblock %}
+
+    
+  

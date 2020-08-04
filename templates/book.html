@@ -1,0 +1,83 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    {{book.name}}
+{% endblock %}
+{% block flashmsg %}
+                    {% with messages = get_flashed_messages() %}
+                        {% if messages %}
+                            {% for message in messages %}
+                                <div class="container py-3">
+                                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                            {{message}}
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
+                {% endblock %}
+{% block body %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3 py-3">
+                <img src="http://covers.openlibrary.org/b/isbn/{{isbn}}-M.jpg" alt="Cover" class="img-thumbnail rounded">
+            </div>
+            <div class="col-sm-12 col-md-4 col-lg-4 py-3">
+                <dl class="row">
+                    <p><dt class="col-3">Title:</dt> <dd class="col-9">{{book.title}}</dd></p>
+                    <p><dt class="col-3">Author:</dt> <dd class="col-9">{{book.author}}</dd></p>
+                    <p><dt class="col-3">Year:</dt> <dd class="col-9">{{book.year}}</dd></p>
+                    <p><dt class="col-3">ISBN:</dt> <dd class="col-9">{{book.isbn}}</dd></p>
+                    <p><dt class="col-3">Rating:</dt> <dd class="col-9">{{avg_rating}}</dd></p>
+                    <p><dt class="col-3">Rating Counts:</dt> <dd class="col-9">{{rate_count}}</dd></p>
+                </dl>
+            </div>
+            <div class="col-sm-12 col-md-5 col-lg-5 py-3">
+                {% if reviews %}
+                        {% for review in reviews %}
+                            
+                            <strong>{{review.first_name}} {{review.last_name}}</strong><br>
+                            <em>{{review.text}}</em><br>
+                            <small>{{review.rate}} out of 5</small><br><br>
+                            
+                        {% endfor %}
+                {% else %}
+                    <h6 class="py-3 text-center">No Review Available</h6>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-6">
+                <h6><strong>Post Review</strong></h6>
+        <form action="{{url_for('submit',book_id=book.id)}}" method="POST">
+            <div class="form-group">
+              <label for="exampleFormControlTextarea1">Insert Text</label>
+              <textarea class="form-control" name="text" id="exampleFormControlTextarea1" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="exampleFormControlSelect1">Rate</label>
+                <select class="form-control w-25" id="exampleFormControlSelect1" name="rate">
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+            <button type="submit" class="btn btn-dark">Post</button>
+          </form>
+          <a class="btn btn-outline-secondary btn-lg my-2" href="{{url_for('login')}}" role="button">Search Again</a>
+            </div>
+            <div class="col-sm-12 col-md-3 col-lg-3">
+
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
